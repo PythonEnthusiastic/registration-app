@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 import useInput from "../../hooks/useInput.js";
 
@@ -6,6 +7,12 @@ import Navbar from "../../components/Navbar/index.jsx"
 
 const Register = () => {
     const [input, setInput] = useInput();
+
+    const sendRegistration = () => {
+        axios.post("/api/v1/register", {
+            data: JSON.stringify(input)
+        })
+    }
 
     return (
         <>
@@ -26,6 +33,7 @@ const Register = () => {
                 <input type="text" id="telephone" name="telephone" onChange={setInput}/>
                 <label htmlFor="address">Address</label>
                 <input type="text" id="address" name="address" onChange={setInput}/>
+                <button type="button" onClick={sendRegistration}>Register</button>
             </form>
         </>
     )
