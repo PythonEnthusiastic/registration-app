@@ -12,6 +12,10 @@ app.post("/api/v1/register", (req, res) => {
     console.log(req.body.data)
 })
 
+app.post("/api/v1/login", (req, res) => {
+    console.log(req.body.data)
+})
+
 app.listen(PORT, () => {
     console.log(`listening to port ${PORT}`)
 })
