@@ -8,7 +8,7 @@ import Navbar from "../../components/Navbar/index.jsx"
 const Login = () => {
     const [input, setInput] = useInput();
 
-    const loginSender = () => {
+    const sendLogin = () => {
         axios.post("/api/v1/login", {
             data: JSON.stringify(input)
         })
@@ -23,7 +23,7 @@ const Login = () => {
                 <input type="text" id="email" name="email" onChange={setInput} />
                 <label htmlFor="passeword">Password:</label>
                 <input type="password" id="password" name="password" onChange={setInput} />
-                <button type="button" onClick={loginSender}>Login</button>
+                <button type="button" onClick={sendLogin}>Login</button>
             </form>
         </>
     )
