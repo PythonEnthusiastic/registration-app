@@ -9,11 +9,15 @@ app.get("/api/v1", (req, res) => {
 })
 
 app.post("/api/v1/register", (req, res) => {
-    console.log(req.body.data)
+    const credentials = JSON.parse(req.body.data)
+
+    console.log(credentials)
 })
 
 app.post("/api/v1/login", (req, res) => {
-    console.log(req.body.data)
+    const credentials = JSON.parse(req.body.data)
+
+    console.log(credentials)
 })
 
 app.listen(PORT, () => {
