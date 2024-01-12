@@ -11,13 +11,13 @@ app.get("/api/v1", (req, res) => {
 app.post("/api/v1/register", (req, res) => {
     const credentials = JSON.parse(req.body.data)
 
-    console.log(credentials)
+    res.sendStatus(200)
 })
 
 app.post("/api/v1/login", (req, res) => {
     const credentials = JSON.parse(req.body.data)
 
-    console.log(credentials)
+    res.sendStatus(200)
 })
 
 app.listen(PORT, () => {
