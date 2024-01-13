@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import useInput from "../../hooks/useInput.js";
@@ -7,10 +8,14 @@ import Navbar from "../../components/Navbar/index.jsx"
 
 const Register = () => {
     const [input, setInput] = useInput();
+    const navigate = useNavigate();
 
     const sendRegistration = () => {
         axios.post("/api/v1/register", {
             data: JSON.stringify(input)
+        })
+        .then(_ => {
+            navigate("/")
         })
     }
 
