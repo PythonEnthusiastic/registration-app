@@ -4,23 +4,32 @@ const app = express();
 const PORT = 4000;
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.get("/api/v1", (req, res) => {
     res.send("hello")
 })
 
 app.post("/api/v1/register", (req, res) => {
-    const credentials = JSON.parse(req.body.data)
+    try {
+        const credentials = JSON.parse(req.body.data)
 
-    res.cookie('name', 'logged')
-    res.sendStatus(200)
+        res.cookie('lol', 'logged', { httpOnly: true })
+        res.sendStatus(200)
+    } catch (err) {
+        res.sendStatus(400)
+    }
 })
 
 app.post("/api/v1/login", (req, res) => {
-    const credentials = JSON.parse(req.body.data)
+    try {
+        const credentials = JSON.parse(req.body.data)
 
-    res.cookie('name', 'logged')
-    res.sendStatus(200)
+        res.cookie('name', 'logged', { httpOnly: true })
+        res.sendStatus(200)
+    } catch {err} {
+        res.sendStatus(400)
+    }
 })
 
 app.listen(PORT, () => {
