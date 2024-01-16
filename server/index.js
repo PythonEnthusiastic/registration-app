@@ -14,7 +14,7 @@ app.post("/api/v1/register", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data)
 
-        res.cookie('lol', 'logged', { httpOnly: true })
+        res.cookie('userInfo', JSON.stringify(credentials), { httpOnly: true })
         res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
@@ -25,7 +25,7 @@ app.post("/api/v1/login", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data)
 
-        res.cookie('name', 'logged', { httpOnly: true })
+        res.cookie('userInfo', JSON.stringify(credentials), { httpOnly: true })
         res.sendStatus(200)
     } catch {err} {
         res.sendStatus(400)
