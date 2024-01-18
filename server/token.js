@@ -7,3 +7,11 @@ exports.generate = (data) => {
         console.log(err)
     }
 }
+
+exports.decode = (token) => {
+    try {
+        let decoded = jwt.verify(token, 'tobeadded');
+    } catch (err) {
+        console.log(err)
+    }
+}
