@@ -14,9 +14,10 @@ app.get("/api/v1", (req, res) => {
 app.post("/api/v1/register", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
-        const tokened = tokenizer.generate(credentials);
+        
+        // encrypt password
+        // save to database
 
-        res.cookie('userInfo', JSON.stringify(tokened), { httpOnly: true })
         res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
