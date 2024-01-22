@@ -22,7 +22,6 @@ const Register = () => {
     return (
         <>
             <Navbar />
-            <h1>Register Page</h1>
             <form>
                 <label htmlFor="fname">First Name</label>
                 <input type="text" id="fname" name="fname" onChange={setInput}/>

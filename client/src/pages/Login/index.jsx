@@ -22,7 +22,6 @@ const Login = () => {
     return (
         <>
             <Navbar />
-            <h1>Login Page</h1>
             <form>
                 <label htmlFor="email">Email:</label>
                 <input type="text" id="email" name="email" onChange={setInput} />
