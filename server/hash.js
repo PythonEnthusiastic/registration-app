@@ -1,10 +1,9 @@
 const bcrypt = require("bcryptjs");
 
 exports.encrypt = (password) => {
-    var bcrypt = require('bcryptjs');
     bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash("B4c0/\/", salt, function(err, hash) {
-        // Store hash in your password DB.
+        bcrypt.hash(password, salt, function(err, hash) {
+            return hash
         });
     });
 }
