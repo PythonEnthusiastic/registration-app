@@ -1,6 +1,8 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const tokenizer = require("./token.js")
+const hash = require("./hash.js")
+
 const app = express();
 const PORT = 4000;
 
@@ -11,6 +13,7 @@ app.post("/api/v1/register", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
         
+        const hashed = hash.encrypt(credentials.password)
         // encrypt password
         // save to database
 
