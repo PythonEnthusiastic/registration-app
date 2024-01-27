@@ -14,10 +14,8 @@ app.post("/api/v1/register", (req, res) => {
         const credentials = JSON.parse(req.body.data);
         
         const hashed = hash.encrypt(credentials.password)
-        // encrypt password
-        // save to database
 
-        res.sendStatus(200)
+        res.send(hashed).status(200)
     } catch (err) {
         res.sendStatus(400)
     }
