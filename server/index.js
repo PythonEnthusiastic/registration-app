@@ -15,7 +15,7 @@ app.post("/api/v1/register", (req, res) => {
         
         const hashed = hash.encrypt(credentials.password)
 
-        res.send(hashed).status(200)
+        res.status(200).send(hashed)
     } catch (err) {
         res.sendStatus(400)
     }
@@ -27,7 +27,7 @@ app.post("/api/v1/login", (req, res) => {
         const tokened = tokenizer.generate(credentials);
 
         res.cookie('userInfo', JSON.stringify(tokened), { httpOnly: true })
-        res.sendStatus(200)
+        res.status(200).send(tokened)
     } catch (err) {
         res.sendStatus(400)
     }
