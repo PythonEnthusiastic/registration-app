@@ -27,7 +27,7 @@ app.post("/api/v1/login", (req, res) => {
         const tokened = tokenizer.generate(credentials);
         const hashed = hash.encrypt(tokened)
 
-        res.cookie('userInfo', JSON.stringify(hashed), { httpOnly: true })
+        res.cookie('userID', JSON.stringify(hashed), { httpOnly: true })
         res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
