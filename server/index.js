@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.post("/api/v1/register", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
-        const hashed = hash.encrypt(credentials.password)
+        // const hashed = hash.encrypt(credentials.password)
 
         res.sendStatus(200)
     } catch (err) {
@@ -24,7 +24,7 @@ app.post("/api/v1/login", (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
         const tokened = tokenizer.generate(credentials);
-        const hashed = hash.encrypt(credentials.password);
+        // const hashed = hash.encrypt(credentials.password);
 
         res.cookie('userID', JSON.stringify(tokened), { httpOnly: true })
         res.sendStatus(200)
