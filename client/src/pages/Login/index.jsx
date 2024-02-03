@@ -15,7 +15,7 @@ const Login = () => {
             data: JSON.stringify(input)
         })
         .then(_ => {
-            navigate("/")
+            navigate("/dashboard")
         })
     }
 
@@ -25,8 +25,10 @@ const Login = () => {
             <form>
                 <label htmlFor="email">Email:</label>
                 <input type="text" id="email" name="email" onChange={setInput} />
+
                 <label htmlFor="passeword">Password:</label>
                 <input type="password" id="password" name="password" onChange={setInput} />
+                
                 <button type="button" onClick={sendLogin}>Login</button>
             </form>
         </>
