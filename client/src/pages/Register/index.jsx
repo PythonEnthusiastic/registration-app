@@ -17,6 +17,9 @@ const Register = () => {
         .then(_ => {
             navigate("/dashboard")
         })
+        .catch(_ => {
+            console.log("Error")
+        })
     }
 
     return (
