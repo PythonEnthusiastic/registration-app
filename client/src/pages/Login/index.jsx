@@ -17,8 +17,8 @@ const Login = () => {
         .then(_ => {
             navigate("/dashboard")
         })
-        .catch(_ => {
-            console.log("Error")
+        .catch(err => {
+            console.log(err)
         })
     }
 
