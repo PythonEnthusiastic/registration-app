@@ -1,9 +1,16 @@
 const bcrypt = require("bcryptjs");
 
 exports.encrypt = (password) => {
-    bcrypt.hash(password, 12, function(err, hashed) {
-        return hashed
-    });
+    bcrypt.hash(
+        password, 
+        12
+    )
+    .then(res => {
+        return res
+    })
+    .catch(err => {
+        console.error(err)
+    })
 }
 
 exports.decrypt = (password, hash) => {
@@ -11,7 +18,10 @@ exports.decrypt = (password, hash) => {
         password, 
         hash
     )
-    .then((res) => {
+    .then(res => {
         return res
+    })
+    .catch(err => {
+        console.error(err)
     })
 }
