@@ -10,17 +10,21 @@ const PORT = 4000;
 app.use(express.json())
 app.use(cookieParser())
 
-app.post("/api/v1/register", (req, res) => {
-    try {
-        const credentials = JSON.parse(req.body.data);
-        // const hashed = hash.encrypt(credentials.password)
-
-        db.createUser(credentials)
-
-        res.sendStatus(200)
-    } catch (err) {
+app.post("/api/v1/register", async (req, res) => {
+    const credentials = JSON.parse(req.body.data);
+    
+    hash.encrypt(
+        credentials.password
+    )
+    .then(res => {
+        credentials.password = res
+        // db.createUser(credentials)
+    })
+    .catch(err => {
         res.sendStatus(400)
-    }
+    })
+
+    res.sendStatus(200)
 })
 
 app.post("/api/v1/login", (req, res) => {

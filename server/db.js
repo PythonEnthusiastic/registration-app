@@ -19,7 +19,7 @@ const studentSchema = new mongoose.Schema({
     createDate: { type: Date, default: Date.now }
 });
 
-const student = mongoose.model("student", studentSchema)
+const student = mongoose.model("student", studentSchema, 'test.students')
 
 exports.createUser = (data) => {
     const newUser = new student();
