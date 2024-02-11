@@ -1,21 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 exports.generate = (data) => {
-    try {
-        let token = jwt.sign(data, 'tobeadded');
-
-        return token
-    } catch (err) {
-        console.log(err)
-    }
+    jwt.sign(
+        data, 
+        'tobeadded'
+    )
+    .then(res => res)
 }
 
 exports.decode = (token) => {
-    try {
-        let decoded = jwt.verify(token, 'tobeadded');
-
-        return decoded
-    } catch (err) {
-        console.log(err)
-    }
+    jwt.verify(
+        token, 
+        'tobeadded'
+    )
+    .then(res => res)
 }
