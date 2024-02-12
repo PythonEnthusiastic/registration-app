@@ -1,17 +1,19 @@
+require('dotenv').config()
 const jwt = require("jsonwebtoken");
+const secret = process.env.SECRET
 
-exports.generate = (data) => {
+exports.generate = (data) => (
     jwt.sign(
         data, 
-        'tobeadded'
+        secret
     )
     .then(res => res)
-}
+)
 
-exports.decode = (token) => {
+exports.decode = (token) => (
     jwt.verify(
         token, 
-        'tobeadded'
+        secret
     )
     .then(res => res)
-}
+)
