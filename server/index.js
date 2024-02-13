@@ -31,15 +31,21 @@ app.post("/api/v1/login", (req, res) => {
     console.log("hi")
     try {
         const credentials = JSON.parse(req.body.data);
-        // const tokened = tokenizer.generate(credentials);
+        const tokened = tokenizer.generate(credentials);
         // const hashed = hash.encrypt(credentials.password);
 
-        // res.cookie('userID', JSON.stringify(tokened), { httpOnly: true })
+        res.cookie('userID', JSON.stringify(tokened), { httpOnly: true })
         res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
     }
 })
+
+function getToken(data) {
+    const tokened = tokenizer.generate(data);
+
+    return tokened
+}
 
 app.listen(PORT, () => {
     console.log(`listening to port ${PORT}`)
