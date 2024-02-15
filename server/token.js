@@ -7,7 +7,7 @@ exports.generate = (data) => (
         data, 
         secret
     )
-    .then(res => res)
+    .then(res => 'bearer ' + res)
 )
 
 exports.decode = (token) => (

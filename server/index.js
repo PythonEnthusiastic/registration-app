@@ -31,10 +31,10 @@ app.post("/api/v1/login", (req, res) => {
     console.log("hi")
     try {
         const credentials = JSON.parse(req.body.data);
-        const tokened = tokenizer.generate(credentials);
+        const token = getToken(credentials);
         // const hashed = hash.encrypt(credentials.password);
 
-        res.cookie('userID', JSON.stringify(tokened), { httpOnly: true })
+        res.cookie('userID', JSON.stringify(token), { httpOnly: true })
         res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
