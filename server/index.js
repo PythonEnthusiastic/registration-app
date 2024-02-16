@@ -18,7 +18,7 @@ app.post("/api/v1/register", async (req, res) => {
     )
     .then(res => {
         credentials.password = res
-        // db.createUser(credentials)
+        db.createUser(credentials)
     })
     .catch(err => {
         res.sendStatus(400)
