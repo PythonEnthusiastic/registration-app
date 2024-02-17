@@ -27,12 +27,12 @@ app.post("/api/v1/register", async (req, res) => {
     res.sendStatus(200)
 })
 
-app.post("/api/v1/login", (req, res) => {
-    console.log("hi")
+app.post("/api/v1/login", async (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
+        credentials.password = await hash.encrypt(credentials.password)
+        console.log(credentials)
         const token = getToken(credentials);
-        // const hashed = hash.encrypt(credentials.password);
 
         res.cookie('userID', JSON.stringify(token), { httpOnly: true })
         res.sendStatus(200)
