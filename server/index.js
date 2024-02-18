@@ -19,6 +19,8 @@ app.post("/api/v1/register", async (req, res) => {
     .then(res => {
         credentials.password = res
         db.createUser(credentials)
+        const token = await getToken(credentials);
+        res.cookie('userID', JSON.stringify(token), { httpOnly: true })
     })
     .catch(err => {
         res.sendStatus(400)
