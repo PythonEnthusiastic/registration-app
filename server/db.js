@@ -26,3 +26,9 @@ exports.createUser = async (data) => {
 
     await newUser.save()
 }
+
+exports.findUser = async (name) => {
+    const user = await student.find({ username: name })
+
+    return user
+}
