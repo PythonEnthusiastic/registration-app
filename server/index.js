@@ -32,12 +32,17 @@ app.post("/api/v1/register", async (req, res) => {
 app.post("/api/v1/login", async (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
+        const user = db.findUser(credentials.username)
         credentials.password = await hash.encrypt(credentials.password)
-        console.log(credentials)
-        const token = getToken(credentials);
 
-        res.cookie('userID', JSON.stringify(token), { httpOnly: true })
-        res.sendStatus(200)
+        if (credentials.password == user.password) {
+            const token = getToken(credentials);
+
+            res.cookie('userID', JSON.stringify(token), { httpOnly: true })
+            res.sendStatus(200)
+        } else {
+            res.sendStatus(400)
+        }
     } catch (err) {
         res.sendStatus(400)
     }
