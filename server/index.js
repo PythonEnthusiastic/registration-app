@@ -12,47 +12,35 @@ app.use(cookieParser())
 
 app.post("/api/v1/register", async (req, res) => {
     const credentials = JSON.parse(req.body.data);
-    
-    hash.encrypt(
-        credentials.password
-    )
-    .then(res => {
-        credentials.password = res
-        db.createUser(credentials)
-        const token = await getToken(credentials);
-        res.cookie('userID', JSON.stringify(token), { httpOnly: true })
-    })
-    .catch(err => {
-        res.sendStatus(400)
-    })
+    const encryptedPass = await hash.encrypt(credentials.password)
+    credentials.password = encryptedPass
 
+    db.createUser(credentials)
+
+    const token = getToken(credentials);
+    
+    res.cookie('userID', JSON.stringify(token), { httpOnly: true })
     res.sendStatus(200)
 })
 
 app.post("/api/v1/login", async (req, res) => {
     try {
         const credentials = JSON.parse(req.body.data);
-        const user = db.findUser(credentials.username)
-        credentials.password = await hash.encrypt(credentials.password)
+        const user = await db.findUser(credentials.email);
+        const isPassword = await hash.decrypt(credentials.password, user.password)
 
-        if (credentials.password == user.password) {
-            const token = getToken(credentials);
-
-            res.cookie('userID', JSON.stringify(token), { httpOnly: true })
-            res.sendStatus(200)
-        } else {
-            res.sendStatus(400)
+        if (!isPassword) {
+            throw new Error('Incorrect Password');
         }
+
+        const token = tokenizer.generate(credentials);
+        
+        res.cookie('userID', JSON.stringify(token), { httpOnly: true })
+        res.sendStatus(200)
     } catch (err) {
         res.sendStatus(400)
     }
 })
-
-function getToken(data) {
-    const tokened = tokenizer.generate(data);
-
-    return tokened
-}
 
 app.listen(PORT, () => {
     console.log(`listening to port ${PORT}`)

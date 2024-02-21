@@ -23,12 +23,10 @@ const student = mongoose.model("student", studentSchema, 'test.students')
 
 exports.createUser = async (data) => {
     const newUser = new student(data);
-
     await newUser.save()
 }
 
 exports.findUser = async (name) => {
-    const user = await student.find({ username: name })
-
-    return user
+    const user = await student.find({ email: name })
+    return user[0]
 }
