@@ -33,7 +33,7 @@ app.post("/api/v1/login", async (req, res) => {
             throw new Error('Incorrect Password');
         }
 
-        const token = tokenizer.generate(credentials);
+        const token = tokenizer.generate({ username: credentials.username, email: credentials.email });
         
         res.cookie('userID', JSON.stringify(token), { httpOnly: true })
         res.sendStatus(200)
