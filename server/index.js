@@ -17,7 +17,7 @@ app.post("/api/v1/register", async (req, res) => {
 
     db.createUser(credentials)
 
-    const token = getToken(credentials);
+    const token = getToken({ username: credentials.username, email: credentials.email });
     
     res.cookie('userID', JSON.stringify(token), { httpOnly: true })
     res.sendStatus(200)
