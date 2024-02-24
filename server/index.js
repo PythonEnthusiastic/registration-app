@@ -10,6 +10,17 @@ const PORT = 4000;
 app.use(express.json())
 app.use(cookieParser())
 
+async function authentication(req, res, next) {
+    const authCookie = req.cookies['userID'];
+    const isValidToken = tokenizer.decode(authCookie);
+
+    if (isValidToken) {
+        next()
+    }
+
+    res.sendStatus(400)
+}
+
 app.post("/api/v1/register", async (req, res) => {
     const credentials = JSON.parse(req.body.data);
     const encryptedPass = await hash.encrypt(credentials.password)
