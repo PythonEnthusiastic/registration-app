@@ -28,7 +28,7 @@ app.post("/api/v1/register", async (req, res) => {
 
     db.createUser(credentials)
 
-    const token = getToken({ username: credentials.username, email: credentials.email });
+    const token = getToken({ username: credentials.username });
     
     res.cookie('userID', JSON.stringify(token), { httpOnly: true })
     res.sendStatus(200)
@@ -44,7 +44,7 @@ app.post("/api/v1/login", async (req, res) => {
             throw new Error('Incorrect Password');
         }
 
-        const token = tokenizer.generate({ username: credentials.username, email: credentials.email });
+        const token = tokenizer.generate({ username: credentials.username });
         
         res.cookie('userID', JSON.stringify(token), { httpOnly: true })
         res.sendStatus(200)
